@@ -19,8 +19,8 @@ POST    /longpolling/room/messages              LongPolling.say
 GET     /longpolling/room/leave                 LongPolling.leave    
 
 # WebSocket demo
-GET     /websocket/room                         WebSocket.room
-WS      /websocket/room/socket                  WebSocket.ChatRoomSocket.join    
+#GET     /websocket/room                         WebSocket.room
+#WS      /websocket/room/socket                  WebSocket.ChatRoomSocket.join    
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

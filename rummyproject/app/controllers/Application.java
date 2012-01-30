@@ -27,9 +27,6 @@ public class Application extends Controller {
         if(demo.equals("longpolling")) {
             LongPolling.room(user);
         }
-        if(demo.equals("websocket")) {
-            WebSocket.room(user);
-        }        
     }
 
 }
