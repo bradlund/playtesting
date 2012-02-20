@@ -3,6 +3,7 @@ package models;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 public class MacroSession extends Model {
 
+    @OneToMany
     public List<WorkoutDay> workoutDays;
     public String name;
     public Date startDate;

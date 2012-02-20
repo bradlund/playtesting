@@ -3,6 +3,7 @@ package models;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -15,14 +16,16 @@ public class Exercise extends Model {
 
     public String name;
     public Boolean leftRightSeparate;
+    @OneToMany
     public List<RepCount> standardRepCounts;
     public String notes;
+    @OneToMany
     public List<RepCount> leftRepCounts;
+    @OneToMany
     public List<RepCount> rightRepCounts;
 
-    public Exercise(String name, Boolean leftRightSeparate, String notes) {
+    public Exercise(String name, Boolean leftRightSeparate) {
         this.name = name;
         this.leftRightSeparate = leftRightSeparate;
-        this.notes = notes;
     }
 }

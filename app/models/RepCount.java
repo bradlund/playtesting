@@ -2,7 +2,9 @@ package models;
 
 import play.db.jpa.Model;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -17,20 +19,21 @@ public class RepCount extends Model {
 
     public Float dumbbellWeight;
 
-    public List<Bands> bandsUsed;
+    @ElementCollection
+    public List<String> bandsUsed;
 
-    public RepType type = RepType.PRIMARY;
+    public String type = RepType.PRIMARY;
 
     public RepCount(int count) {
         this.count = count;
     }
 
-    public RepCount(int count, RepType type) {
+    public RepCount(int count, String type) {
         this.count = count;
         this.type = type;
     }
 
-    public RepCount(int count, Float dumbbellWeight, List<Bands> bandsUsed, RepType type) {
+    public RepCount(int count, Float dumbbellWeight, List<String> bandsUsed, String type) {
         this.count = count;
         this.dumbbellWeight = dumbbellWeight;
         this.bandsUsed = bandsUsed;
