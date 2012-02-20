@@ -4,6 +4,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class RepCount extends Model {
     public int count;
 
     public Float dumbbellWeight;
+
+    @ManyToOne
+    public Exercise exercise;
 
     @ElementCollection
     public List<String> bandsUsed;

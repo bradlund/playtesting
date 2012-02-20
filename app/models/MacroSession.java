@@ -22,5 +22,7 @@ public class MacroSession extends Model {
     public List<WorkoutDay> workoutDays;
     public String name;
     public Date startDate;
+    public String authorName;
+    public User authorUser;
 
 }

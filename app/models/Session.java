@@ -8,14 +8,19 @@ package models;
 
 import play.db.jpa.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
 public class Session extends Model {
 
-    @OneToMany
+    @ManyToOne
+    public WorkoutDay workoutDay;
+
+    @OneToMany(mappedBy="session", cascade= CascadeType.ALL)
     public List<Exercise> exercises;
 
     public Boolean isOptional;
