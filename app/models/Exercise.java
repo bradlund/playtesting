@@ -19,4 +19,10 @@ public class Exercise extends Model {
     public String notes;
     public List<RepCount> leftRepCounts;
     public List<RepCount> rightRepCounts;
+
+    public Exercise(String name, Boolean leftRightSeparate, String notes) {
+        this.name = name;
+        this.leftRightSeparate = leftRightSeparate;
+        this.notes = notes;
+    }
 }
