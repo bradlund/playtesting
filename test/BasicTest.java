@@ -1,3 +1,4 @@
+import models.User;
 import models.plans.ExercisePlan;
 import models.plans.MacroSessionPlan;
 import models.plans.SessionPlan;
@@ -89,6 +90,7 @@ public class BasicTest extends UnitTest {
         Fixtures.loadModels( "UserAndPlan.yml");
 
         assertEquals( 4, SessionPlan.count());
+        assertEquals( 1, User.count());
     }
 
 }
