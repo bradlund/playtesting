@@ -1,4 +1,4 @@
-package models;
+package models.executions;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,15 +21,15 @@ public class Session extends Model {
     public WorkoutDay workoutDay;
 
     @OneToMany(mappedBy="session", cascade= CascadeType.ALL)
-    public List<Exercise> exercises;
+    public List<Exercise> exercisePlans;
 
     public Boolean isOptional;
 
     public String name;
 
-    public Session(String name, Boolean optional, List<Exercise> exercises) {
+    public Session(String name, Boolean optional, List<Exercise> exercisePlans) {
         this.name = name;
         isOptional = optional;
-        this.exercises = exercises;
+        this.exercisePlans = exercisePlans;
     }
 }

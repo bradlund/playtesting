@@ -1,4 +1,4 @@
-package models;
+package models.executions;
 
 import play.db.jpa.Model;
 
@@ -21,13 +21,13 @@ public class Exercise extends Model {
 
     public String name;
     public Boolean leftRightSeparate;
-    @OneToMany(mappedBy="exercise", cascade= CascadeType.ALL)
-    public List<RepCount> standardRepCounts;
+    @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
+    public List<RepCount> standardRepCountPlans;
     public String notes;
-    @OneToMany(mappedBy="exercise", cascade= CascadeType.ALL)
-    public List<RepCount> leftRepCounts;
-    @OneToMany(mappedBy="exercise", cascade= CascadeType.ALL)
-    public List<RepCount> rightRepCounts;
+    @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
+    public List<RepCount> leftRepCountPlans;
+    @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
+    public List<RepCount> rightRepCountPlans;
 
     public Exercise(String name, Boolean leftRightSeparate) {
         this.name = name;

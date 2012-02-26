@@ -1,7 +1,10 @@
+import models.plans.ExercisePlan;
+import models.plans.MacroSessionPlan;
+import models.plans.SessionPlan;
+import models.plans.WorkoutDayPlan;
 import org.junit.*;
 import java.util.*;
 import play.test.*;
-import models.*;
 
 public class BasicTest extends UnitTest {
 
@@ -18,52 +21,74 @@ public class BasicTest extends UnitTest {
     @Test
     public void createAndRetrieveWorkoutSession() {
 
-        Exercise exercise1 = new Exercise("Push-Ups", false ).save();
-        Exercise exercise2 = new Exercise("Front Wide Grip Pull-Ups", false ).save();
-        Exercise exercise3 = new Exercise("Bicep Curls", true ).save();
+        ExercisePlan exercisePlan1 = new ExercisePlan("Push-Ups", false ).save();
+        ExercisePlan exercisePlan2 = new ExercisePlan("Front Wide Grip Pull-Ups", false ).save();
+        ExercisePlan exercisePlan3 = new ExercisePlan("Bicep Curls", true ).save();
 
-        List<Exercise> exercises = Arrays.asList(exercise1, exercise2, exercise3);
+        List<ExercisePlan> exercisePlans = Arrays.asList(exercisePlan1, exercisePlan2, exercisePlan3);
 
-        Session session1 = new Session("back day", false, exercises ).save();
-        WorkoutDay workoutDay1 = new WorkoutDay();
-        workoutDay1.sessions = Arrays.asList(session1);
-        workoutDay1.date = new Date(2012, 2, 14);
-        workoutDay1.save();
+        SessionPlan sessionPlan1 = new SessionPlan("back day", false, exercisePlans).save();
+        WorkoutDayPlan workoutDayPlan1 = new WorkoutDayPlan();
+        workoutDayPlan1.sessionPlans = Arrays.asList(sessionPlan1);
+        //workoutDayPlan1.date = new Date(2012, 2, 14);
+        workoutDayPlan1.save();
 
-        WorkoutDay retrievedWorkoutDay = WorkoutDay.find( "byDate", new Date(2012,2,14)).first();
+        MacroSessionPlan macroSessionPlan1 = new MacroSessionPlan();
+        macroSessionPlan1.authorName = "J-Dawg";
+        macroSessionPlan1.workoutDayPlans = Arrays.asList(workoutDayPlan1);
+        macroSessionPlan1.name = "A really bad workout";
+        macroSessionPlan1.save();
 
-        assertNotNull( retrievedWorkoutDay);
-        assertNotNull( retrievedWorkoutDay.sessions);
-        assertEquals( 1, retrievedWorkoutDay.sessions.size());
-        Session retrievedSession = retrievedWorkoutDay.sessions.get(0);
-        assertNotNull( retrievedSession);
-        assertNotNull( retrievedSession.exercises);
-        assertEquals( 3, retrievedSession.exercises.size());
-        assertEquals("Bicep Curls", retrievedSession.exercises.get(2).name);
+        MacroSessionPlan retrievedMacroSessionPlan = MacroSessionPlan.find( "byName", "A really bad workout").first();
+
+        assertNotNull( retrievedMacroSessionPlan);
+        assertNotNull( retrievedMacroSessionPlan.workoutDayPlans);
+        WorkoutDayPlan retrievedWorkoutDayPlan = retrievedMacroSessionPlan.workoutDayPlans.get(0);
+        assertNotNull(retrievedWorkoutDayPlan);
+        assertNotNull( retrievedWorkoutDayPlan.sessionPlans);
+        assertEquals( 1, retrievedWorkoutDayPlan.sessionPlans.size());
+        SessionPlan retrievedSessionPlan = retrievedWorkoutDayPlan.sessionPlans.get(0);
+        assertNotNull(retrievedSessionPlan);
+        assertNotNull( retrievedSessionPlan.exercisePlans);
+        assertEquals( 3, retrievedSessionPlan.exercisePlans.size());
+        assertEquals("Bicep Curls", retrievedSessionPlan.exercisePlans.get(2).name);
     }
 
     @Test
     public void testRelations() {
-        Exercise exercise1 = new Exercise("Push-Ups", false ).save();
-        Exercise exercise2 = new Exercise("Front Wide Grip Pull-Ups", false ).save();
-        Exercise exercise3 = new Exercise("Bicep Curls", true ).save();
+        ExercisePlan exercisePlan1 = new ExercisePlan("Push-Ups", false ).save();
+        ExercisePlan exercisePlan2 = new ExercisePlan("Front Wide Grip Pull-Ups", false ).save();
+        ExercisePlan exercisePlan3 = new ExercisePlan("Bicep Curls", true ).save();
 
-        List<Exercise> exercises = Arrays.asList(exercise1, exercise2, exercise3);
+        List<ExercisePlan> exercisePlans = Arrays.asList(exercisePlan1, exercisePlan2, exercisePlan3);
 
-        Session session1 = new Session("back day", false, exercises ).save();
-        WorkoutDay workoutDay1 = new WorkoutDay();
-        workoutDay1.sessions = Arrays.asList(session1);
-        workoutDay1.date = new Date(2012, 2, 14);
-        workoutDay1.save();
+        SessionPlan sessionPlan1 = new SessionPlan("back day", false, exercisePlans).save();
+        WorkoutDayPlan workoutDayPlan1 = new WorkoutDayPlan();
+        workoutDayPlan1.sessionPlans = Arrays.asList(sessionPlan1);
+        workoutDayPlan1.save();
 
-        WorkoutDay retrievedWorkoutDay = WorkoutDay.find( "byDate", new Date(2012,2,14)).first();
+        MacroSessionPlan macroSessionPlan1 = new MacroSessionPlan();
+        macroSessionPlan1.authorName = "J-Dawg";
+        macroSessionPlan1.workoutDayPlans = Arrays.asList(workoutDayPlan1);
+        macroSessionPlan1.name = "A really bad workout";
+        macroSessionPlan1.save();
+
+        MacroSessionPlan retrievedMacroSessionPlan = MacroSessionPlan.find( "byName", "A really bad workout").first();
 
         // delete the workout day
-        retrievedWorkoutDay.delete();
+        retrievedMacroSessionPlan.delete();
 
-        // ensure that all the related exercises and sessions have been deleted
-        assertEquals( 0, Exercise.count());
-        assertEquals( 0, Session.count());
+        // ensure that all the related exercisePlans and sessions have been deleted
+        assertEquals( 0, ExercisePlan.count());
+        assertEquals( 0, SessionPlan.count());
+    }
+
+
+    @Test
+    public void testYamlData() {
+        Fixtures.loadModels( "UserAndPlan.yml");
+
+        assertEquals( 4, SessionPlan.count());
     }
 
 }

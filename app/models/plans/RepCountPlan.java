@@ -1,11 +1,11 @@
-package models;
+package models.plans;
 
+import models.RepType;
 import play.db.jpa.Model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -14,33 +14,30 @@ import java.util.List;
  * Time: 11:28 AM
  */
 @Entity
-public class RepCount extends Model {
+public class RepCountPlan extends Model {
 
     public int count;
 
-    public Float dumbbellWeight;
+    // should be between 0 and 1
+    public Float percentMaxWeight;
 
     @ManyToOne
-    public Exercise exercise;
-
-    @ElementCollection
-    public List<String> bandsUsed;
+    public ExercisePlan exercisePlan;
 
     public String type = RepType.PRIMARY;
 
-    public RepCount(int count) {
+    public RepCountPlan(int count) {
         this.count = count;
     }
 
-    public RepCount(int count, String type) {
+    public RepCountPlan(int count, String type) {
         this.count = count;
         this.type = type;
     }
 
-    public RepCount(int count, Float dumbbellWeight, List<String> bandsUsed, String type) {
+    public RepCountPlan(int count, Float percentMaxWeight, String type) {
         this.count = count;
-        this.dumbbellWeight = dumbbellWeight;
-        this.bandsUsed = bandsUsed;
+        this.percentMaxWeight = percentMaxWeight;
         this.type = type;
     }
 

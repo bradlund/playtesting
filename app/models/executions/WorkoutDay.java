@@ -1,4 +1,4 @@
-package models;
+package models.executions;
 
 import play.db.jpa.Model;
 

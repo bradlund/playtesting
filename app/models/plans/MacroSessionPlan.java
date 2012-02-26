@@ -1,10 +1,11 @@
-package models;
+package models.plans;
 
+import models.User;
 import play.db.jpa.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -16,10 +17,10 @@ import java.util.List;
  * Time: 11:38 AM
  */
 @Entity
-public class MacroSession extends Model {
+public class MacroSessionPlan extends Model {
 
-    @OneToMany
-    public List<WorkoutDay> workoutDays;
+    @OneToMany(mappedBy="macroSessionPlan", cascade= CascadeType.ALL)
+    public List<WorkoutDayPlan> workoutDayPlans;
     public String name;
     public Date startDate;
     public String authorName;
