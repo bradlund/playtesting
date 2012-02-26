@@ -1,5 +1,6 @@
 package models.executions;
 
+import models.plans.ExercisePlan;
 import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
@@ -22,15 +23,25 @@ public class Exercise extends Model {
     public String name;
     public Boolean leftRightSeparate;
     @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
-    public List<RepCount> standardRepCountPlans;
+    public List<RepCount> standardRepCount;
     public String notes;
     @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
-    public List<RepCount> leftRepCountPlans;
+    public List<RepCount> leftRepCount;
     @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
-    public List<RepCount> rightRepCountPlans;
+    public List<RepCount> rightRepCount;
+
+	public ExercisePlan plan;
 
     public Exercise(String name, Boolean leftRightSeparate) {
         this.name = name;
         this.leftRightSeparate = leftRightSeparate;
     }
+
+	public static Exercise createFromTemplate( ExercisePlan plan )
+	{
+		Exercise exercise = new Exercise( plan.name, plan.leftRightSeparate );
+		exercise.plan = plan;
+
+		return exercise;
+	}
 }

@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.List;
 
@@ -20,9 +21,6 @@ public class RepCountPlan extends Model {
 
     // should be between 0 and 1
     public Float percentMaxWeight;
-
-    @ManyToOne
-    public ExercisePlan exercisePlan;
 
     public String type = RepType.PRIMARY;
 

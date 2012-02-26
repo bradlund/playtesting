@@ -1,6 +1,7 @@
 package models.executions;
 
 import models.RepType;
+import models.plans.RepCountPlan;
 import play.db.jpa.Model;
 
 import javax.persistence.ElementCollection;
@@ -17,9 +18,6 @@ import java.util.List;
 public class RepCount extends Model {
 
     public int count;
-
-    // should be between 0 and 1
-    public Float percentMaxWeight;
 
     @ManyToOne
     public Exercise exercisePlan;
@@ -38,11 +36,9 @@ public class RepCount extends Model {
         this.type = type;
     }
 
-    public RepCount(int count, Float percentMaxWeight, List<String> bandsUsed, String type) {
+    public RepCount(int count, List<String> bandsUsed, String type) {
         this.count = count;
-        this.percentMaxWeight = percentMaxWeight;
         this.bandsUsed = bandsUsed;
         this.type = type;
     }
-
 }

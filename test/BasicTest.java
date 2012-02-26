@@ -87,10 +87,23 @@ public class BasicTest extends UnitTest {
 
     @Test
     public void testYamlData() {
+		Fixtures.deleteAllModels();
         Fixtures.loadModels( "UserAndPlan.yml");
 
+		assertEquals( 10, ExercisePlan.count() );
         assertEquals( 4, SessionPlan.count());
+		assertEquals( 4, WorkoutDayPlan.count());
+		assertEquals( 1, MacroSessionPlan.count());
         assertEquals( 1, User.count());
-    }
 
+		ExercisePlan jumpingPlan = ExercisePlan.find( "byName", "Jumping").first();
+		assertNotNull( jumpingPlan);
+		assertNotNull( jumpingPlan.standardRepCountPlans);
+		assertEquals( 1, jumpingPlan.standardRepCountPlans.size());
+
+		MacroSessionPlan retrievedMacroSessionPlan = MacroSessionPlan.find( "byName", "P90X Original").first();
+		assertNotNull( retrievedMacroSessionPlan);
+		assertNotNull( retrievedMacroSessionPlan.workoutDayPlans );
+		assertEquals( 4, retrievedMacroSessionPlan.workoutDayPlans.size());
+	}
 }

@@ -1,8 +1,10 @@
+#Users
 User(brad):
   username: brad
   password: pass
   bandset: [ RED, BLUE, BLACK]
 
+#Rep Counts
 plans.RepCountPlan(rc1):
   count: -1
 
@@ -46,6 +48,13 @@ plans.RepCountPlan(rc13):
 plans.RepCountPlan(rc14):
   count: 30
 
+# Macro Sessions
+plans.MacroSessionPlan(p90x1):
+  name: P90X Original
+  authorName: Tony Horton
+
+
+
 plans.ExercisePlan(exercise1):
   name: "Front Grip Wide Pull-up"
   leftRightSeparate: false
@@ -68,7 +77,8 @@ plans.ExercisePlan(exercise4):
 plans.ExercisePlan(exercise5):
   name: "Jumping"
   leftRightSeparate: false
-  standardRepCountPlans: [rc5]
+  standardRepCountPlans:
+  - rc5
 
 plans.ExercisePlan(exercise6):
   name: "Standing Dumbbell Bicep Curl"
@@ -100,6 +110,8 @@ plans.ExercisePlan(exercise10):
   standardRepCountPlans: [rc14]
 
 
+
+# Session Plans - must be defined after Exercise Plans
 plans.SessionPlan(session1):
   name: Chest and Back
   isOptional: false
@@ -120,21 +132,20 @@ plans.SessionPlan(session4):
   isOptional: false
   exercisePlans: [exercise1, exercise9, exercise10]
 
-
-
+#Workout Days - must be defined after Macro Sessions and Session Plans
 plans.WorkoutDayPlan(day1):
+  macroSessionPlan: p90x1
   sessionPlans: [session2, session1]
 
 plans.WorkoutDayPlan(day2):
+  macroSessionPlan: p90x1
   sessionPlans: [session3]
 
 plans.WorkoutDayPlan(day3):
-  sessionPlans: null
+  macroSessionPlan: p90x1
 
 plans.WorkoutDayPlan(day4):
+  macroSessionPlan: p90x1
   sessionPlans: [session1, session4]
 
-plans.MacroSessionPlan(p90x1):
-  name: P90X Original
-  authorName: Tony Horton
-  workoutDayPlans: [ day1, day2, day3, day4 ]
+
