@@ -17,7 +17,7 @@ public class SessionPlan extends Model {
     @ManyToOne
     public WorkoutDayPlan workoutDayPlan;
 
-    @ManyToMany
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "sessionPlan")
     public List<ExercisePlan> exercisePlans;
 
     public Boolean isOptional;

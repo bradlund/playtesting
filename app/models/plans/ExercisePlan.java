@@ -13,8 +13,8 @@ import java.util.List;
 @Entity
 public class ExercisePlan extends Model {
 
-    @ManyToMany( mappedBy="exercisePlans")
-    public List<SessionPlan> sessionPlans;
+    @ManyToOne
+    public SessionPlan sessionPlan;
 
     public String name;
     public Boolean leftRightSeparate;

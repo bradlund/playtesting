@@ -20,9 +20,10 @@ public class Bootstrap extends Job {
         System.out.println("Bootstrap invoked");
 
         // Check if database is empty - if it is, load data from yaml
-        if ( User.count() == 0)
+        if ( false && User.count() == 0)
         {
             System.out.println("Loading data from UserAndPlan.yml...");
+			Fixtures.deleteAllModels();
             Fixtures.loadModels( "UserAndPlan.yml" );
 
 			User firstUser = User.find("byUsername", "brad").first();

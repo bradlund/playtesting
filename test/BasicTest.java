@@ -80,6 +80,9 @@ public class BasicTest extends UnitTest {
         retrievedMacroSessionPlan.delete();
 
         // ensure that all the related exercisePlans and sessions have been deleted
+		assertEquals( 0, MacroSessionPlan.count());
+		assertEquals( 0, WorkoutDayPlan.count());
+		assertEquals( 0, SessionPlan.count());
         assertEquals( 0, ExercisePlan.count());
         assertEquals( 0, SessionPlan.count());
     }
