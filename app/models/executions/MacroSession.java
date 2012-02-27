@@ -49,6 +49,7 @@ public class MacroSession extends Model {
 		{
 			startDate.setDate(startDate.getDate() + 1);
 			WorkoutDay createdDay =  WorkoutDay.createFromTemplate(dayPlan, startDate);
+			session.workoutDays.add( createdDay);
 		}
 
 		return session;

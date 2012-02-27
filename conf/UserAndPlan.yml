@@ -146,6 +146,6 @@ plans.WorkoutDayPlan(day3):
 
 plans.WorkoutDayPlan(day4):
   macroSessionPlan: p90x1
-  sessionPlans: [session1, session4]
+  sessionPlans: [session4]
 
 

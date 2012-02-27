@@ -13,12 +13,12 @@ import java.util.List;
 @Entity
 public class ExercisePlan extends Model {
 
-    @ManyToOne
-    public SessionPlan sessionPlan;
-
     public String name;
     public Boolean leftRightSeparate;
 	public String notes;
+
+	@ManyToMany(mappedBy = "exercisePlans")
+	public List<SessionPlan> sessionPlans;
 
 	@OneToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ExercisePlanToStandardRepCountPlan")

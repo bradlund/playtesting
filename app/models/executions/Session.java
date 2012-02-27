@@ -10,10 +10,7 @@ import models.plans.ExercisePlan;
 import models.plans.SessionPlan;
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +20,7 @@ public class Session extends Model {
     @ManyToOne
     public WorkoutDay workoutDay;
 
-    @OneToMany(mappedBy="session", cascade= CascadeType.ALL)
+	@ManyToMany( cascade = CascadeType.ALL)
     public List<Exercise> exercises;
 
     public Boolean isOptional;

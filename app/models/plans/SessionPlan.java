@@ -14,10 +14,8 @@ import java.util.List;
 @Entity
 public class SessionPlan extends Model {
 
-    @ManyToOne
-    public WorkoutDayPlan workoutDayPlan;
-
-    @OneToMany( cascade = CascadeType.ALL, mappedBy = "sessionPlan")
+    @ManyToMany( cascade = CascadeType.ALL)
+	//@JoinTable(name = "SessionPlanToExercisePlanTable")
     public List<ExercisePlan> exercisePlans;
 
     public Boolean isOptional;

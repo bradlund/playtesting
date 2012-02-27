@@ -2,10 +2,7 @@ package models.plans;
 
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +17,8 @@ public class WorkoutDayPlan extends Model {
     @ManyToOne
     public MacroSessionPlan macroSessionPlan;
 
-    @OneToMany(mappedBy="workoutDayPlan", cascade= CascadeType.ALL)
-    public List<SessionPlan> sessionPlans;
+    //@OneToMany(mappedBy="workoutDayPlan", cascade= CascadeType.ALL)
+	@OneToMany( cascade = CascadeType.ALL)
+	@JoinTable(name = "WorkoutDayPlanToSessionPlanTable")
+	public List<SessionPlan> sessionPlans;
 }

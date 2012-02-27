@@ -14,8 +14,8 @@ import java.util.List;
 @Entity
 public class Exercise extends Model {
 
-    @ManyToOne
-    public Session session;
+	@ManyToMany(mappedBy = "exercises")
+	public List<Session> sessions;
 
     public String name;
     public Boolean leftRightSeparate;
@@ -32,6 +32,7 @@ public class Exercise extends Model {
 	@JoinTable(name = "ExerciseToLeftRepCount")
 	public List<RepCount> rightRepCount;
 
+	@ManyToOne
 	public ExercisePlan plan;
 
     public Exercise(String name, Boolean leftRightSeparate) {

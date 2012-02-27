@@ -108,5 +108,16 @@ public class BasicTest extends UnitTest {
 		assertNotNull( retrievedMacroSessionPlan);
 		assertNotNull( retrievedMacroSessionPlan.workoutDayPlans );
 		assertEquals( 4, retrievedMacroSessionPlan.workoutDayPlans.size());
+
+		WorkoutDayPlan retrievedWorkoutDayPlan = retrievedMacroSessionPlan.workoutDayPlans.get(0);
+		assertNotNull( retrievedWorkoutDayPlan );
+		assertNotNull( retrievedWorkoutDayPlan.sessionPlans );
+		assertEquals( 2, retrievedWorkoutDayPlan.sessionPlans.size());
+
+		SessionPlan retrievedSessionPlan = retrievedWorkoutDayPlan.sessionPlans.get(0);
+		assertNotNull( retrievedSessionPlan);
+		assertNotNull( retrievedSessionPlan.exercisePlans );
+		assertEquals( 2, retrievedSessionPlan.exercisePlans.size());
+
 	}
 }
