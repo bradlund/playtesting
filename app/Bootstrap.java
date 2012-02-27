@@ -6,6 +6,8 @@ import play.jobs.Job;
 import play.jobs.OnApplicationStart;
 import play.test.Fixtures;
 
+import java.util.Date;
+
 /**
  * Created with IntelliJ IDEA.
  * User: brad
@@ -29,8 +31,10 @@ public class Bootstrap extends Job {
 			User firstUser = User.find("byUsername", "brad").first();
 			MacroSessionPlan firstPlan = MacroSessionPlan.find("byName", "P90X Original").first();
 
-			MacroSession firstInstance = MacroSession.createFromTemplate( firstPlan, firstUser);
-			//firstInstance.save();
+			Date startDate = new Date();
+			startDate.setDate( startDate.getDate() - 1);
+			MacroSession firstInstance = MacroSession.createFromTemplate( firstPlan, firstUser, startDate);
+			firstInstance.save();
 
             System.out.println("System now has " + User.count() + " users");
 			System.out.println("System now has " + Exercise.count() + " instantiated exercises");

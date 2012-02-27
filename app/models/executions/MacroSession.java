@@ -6,7 +6,9 @@ import models.plans.WorkoutDayPlan;
 import org.h2.util.New;
 import play.db.jpa.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,25 +24,26 @@ import java.util.List;
 @Entity
 public class MacroSession extends Model {
 
-    @OneToMany
+    @OneToMany(mappedBy="macroSession", cascade= CascadeType.ALL)
     public List<WorkoutDay> workoutDays;
     public String name;
     public Date startDate;
     public String authorName;
+
+	@ManyToOne
     public User authorUser;
 
+	@ManyToOne
     public User exercisingUser;
 
-    public static MacroSession createFromTemplate( MacroSessionPlan plan, User exercisingUser ) {
+    public static MacroSession createFromTemplate( MacroSessionPlan plan, User exercisingUser, Date startDate ) {
 		MacroSession session = new MacroSession();
 		session.exercisingUser = exercisingUser;
-		session.startDate = new Date();
+		session.startDate = startDate;
 		session.name = plan.name;
 		session.authorName = plan.authorName;
 		session.authorUser = plan.authorUser;
 		session.workoutDays = new ArrayList<WorkoutDay>();
-
-		Date startDate = new Date();
 
 		for(WorkoutDayPlan dayPlan : plan.workoutDayPlans)
 		{

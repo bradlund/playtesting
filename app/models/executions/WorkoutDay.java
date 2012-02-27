@@ -6,6 +6,7 @@ import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,7 +20,10 @@ import java.util.List;
 @Entity
 public class WorkoutDay extends Model {
 
-    @OneToMany(mappedBy="workoutDay", cascade= CascadeType.ALL)
+	@ManyToOne
+	public MacroSession macroSession;
+
+	@OneToMany(mappedBy="workoutDay", cascade= CascadeType.ALL)
     public List<Session> sessions;
     public Date date;
     public Boolean dietOkay;

@@ -19,9 +19,6 @@ public class RepCount extends Model {
 
     public int count;
 
-    @ManyToOne
-    public Exercise exercisePlan;
-
     @ElementCollection
     public List<String> bandsUsed;
 

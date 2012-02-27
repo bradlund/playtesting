@@ -23,6 +23,7 @@ public class ExercisePlan extends Model {
 	@OneToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ExercisePlanToStandardRepCountPlan")
     public List<RepCountPlan> standardRepCountPlans;
+
 	@OneToMany( cascade = CascadeType.ALL)
 	@JoinTable(name = "ExercisePlanToLeftRepCountPlan")
 	public List<RepCountPlan> leftRepCountPlans;

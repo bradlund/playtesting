@@ -3,10 +3,7 @@ package models.executions;
 import models.plans.ExercisePlan;
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -22,13 +19,18 @@ public class Exercise extends Model {
 
     public String name;
     public Boolean leftRightSeparate;
-    @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
-    public List<RepCount> standardRepCount;
-    public String notes;
-    @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
-    public List<RepCount> leftRepCount;
-    @OneToMany(mappedBy="exercisePlan", cascade= CascadeType.ALL)
-    public List<RepCount> rightRepCount;
+	public String notes;
+
+	@OneToMany( cascade = CascadeType.ALL)
+	@JoinTable(name = "ExerciseToStandardRepCount")
+	public List<RepCount> standardRepCount;
+
+	@OneToMany( cascade = CascadeType.ALL)
+	@JoinTable(name = "ExerciseToLeftRepCount")
+	public List<RepCount> leftRepCount;
+	@OneToMany( cascade = CascadeType.ALL)
+	@JoinTable(name = "ExerciseToLeftRepCount")
+	public List<RepCount> rightRepCount;
 
 	public ExercisePlan plan;
 
