@@ -11,7 +11,7 @@
 
 	#{if todayWorkouts }
 		#{list items:todayWorkouts.sessions, as:'workoutSession'}
-		<div class="todayWorkoutSession">Workout: <span class="sessionName">${workoutSession?.name}</span> <input type="button" title="Begin!"/></div>
+		<div class="todayWorkoutSession">Workout: <span class="sessionName">${workoutSession?.name}</span> <a class="button" href="/Workout/${workoutSession.id}">Begin!</a></div>
 		#{/list}
 	#{/if}
 	#{else}

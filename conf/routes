@@ -5,6 +5,10 @@
 # Home page
 GET     /                                       Application.index
 
+# Workout page
+GET		/Workout/{sessionId}					Workout.workoutBySession
+GET		/Workout/{sessionId}/{exerciseId}		Workout.workoutBySessionAndExercise
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
