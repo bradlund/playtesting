@@ -1,4 +1,33 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+<!-- #welcome / -->
+
+<h1>Workout Tracker for ${user.username}</h1>
+
+<div class="todaysSchedule">
+	Today:<br/>
+	Program: <span class="programName">${macroSession.name}</span>
+
+	#{if todayWorkouts }
+		#{list items:todayWorkouts.sessions, as:'workoutSession'}
+		<div class="todayWorkoutSession">Workout: <span class="sessionName">${workoutSession.name}</span> <input type="button" title="Begin!"/></div>
+		#{/list}
+	#{/if}
+	#{else}
+		No workouts today
+	#{/else}
+
+
+	#{if previousThreeWorkoutDays}
+		<h2>Previous Workout Days:</h2>
+		#{list items:previousThreeWorkoutDays, as:'previousWorkoutDay'}
+		<div class="previousWorkoutSession">
+			${previousWorkoutDay.date.getDateString() }: <span class="workoutName">${previousWorkoutDay.sessions.size()} sessions</span>
+		</div>
+		#{/list}
+	#{/if}
+	#{else}
+		No previous workouts
+	#{/else}
+</div>

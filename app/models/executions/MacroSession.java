@@ -48,7 +48,7 @@ public class MacroSession extends Model {
 		for(WorkoutDayPlan dayPlan : plan.workoutDayPlans)
 		{
 			startDate.setDate(startDate.getDate() + 1);
-			WorkoutDay createdDay =  WorkoutDay.createFromTemplate(dayPlan, startDate);
+			WorkoutDay createdDay =  WorkoutDay.createFromTemplate(dayPlan, (Date) startDate.clone());
 			session.workoutDays.add( createdDay);
 		}
 
