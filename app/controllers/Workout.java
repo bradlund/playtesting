@@ -3,6 +3,7 @@ package controllers;
 import models.User;
 import models.executions.Exercise;
 import models.executions.Session;
+import play.Logger;
 import play.mvc.Controller;
 
 /**
@@ -31,10 +32,8 @@ public class Workout extends Controller {
 		if (null != session && session.exercises.size() > 0) {
 			firstExercise = session.exercises.get(0);
 			workoutBySessionAndExercise(sessionId, firstExercise.id);
-		}
-		else
-		{
-			workoutBySessionAndExercise( sessionId, 0L);
+		} else {
+			workoutBySessionAndExercise(sessionId, 0L);
 		}
 	}
 
@@ -48,8 +47,25 @@ public class Workout extends Controller {
 
 		// TODO: this isn't the real user
 		User user = (User) User.findAll().get(0);
-		Session session = Session.find("byId", sessionId).first();
+		Session workoutSession = Session.find("byId", sessionId).first();
 		Exercise exercise = Exercise.find("byId", exerciseId).first();
-		render(session, exercise, user);
+
+		Exercise nextExercise = null;
+
+		int exerciseIndex = workoutSession.exercises.indexOf( exercise );
+
+		if ( exerciseIndex < (workoutSession.exercises.size() - 1) )
+		{
+			nextExercise = workoutSession.exercises.get(exerciseIndex+1);
+		}
+
+		render(workoutSession, exercise, user, nextExercise);
+	}
+
+
+	public static void postExerciseResult(Long workoutSessionId, Long exerciseId, Float sharedRepCount, Float sharedRepWeight, String[] bandSet ) {
+		Logger.info("Post received for the following parameters:");
+		Logger.info("Session: %s, Exercise %s", workoutSessionId, exerciseId);
+		Logger.info("I did %s reps of %s lbs, or used %s bands", sharedRepCount, sharedRepWeight, (bandSet != null) ? bandSet.length : "No");
 	}
 }

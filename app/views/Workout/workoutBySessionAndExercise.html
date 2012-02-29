@@ -10,25 +10,39 @@ ${exercise?.name}
 <div class="workoutFrame">
 	#{if exercise}
 		<h4>Current:</h4>
-		#{if exercise.leftRightSeparate}
-			<!-- left and right separate moves have two inputs, one per side -->
-		#{/if}
-		#{else}
-			<!-- this is an exercise like barbell bench - one input for weight/rep count -->
-			<!-- TODO use input type="number", using number polyfill https://github.com/jonstipe/number-polyfill -->
-			<input type="text" id="sharedRepCount"/> reps <input type="text" id="sharedRepWeight"/> lbs +
-			#{if user.bandset.size() > 0 }
-				<br/>
-				#{list items:user.bandset, as:"band"}
-				<input type="checkbox" id="sharedBand${band}" value="${band}"/>${band}
-				#{/list}
+		#{form @Workout.postExerciseResult(workoutSession.id, exercise.id )}
+			#{if exercise.leftRightSeparate}
+				<!-- left and right separate moves have two inputs, one per side -->
 			#{/if}
-		#{/else}
+			#{else}
+				<!-- this is an exercise like barbell bench - one input for weight/rep count -->
+				<!-- TODO use input type="number", using number polyfill https://github.com/jonstipe/number-polyfill -->
+				<input type="text" name="sharedRepCount" id="sharedRepCount"/> reps <input type="text" name="sharedRepWeight" id="sharedRepWeight"/> lbs +
+				#{if user.bandset.size() > 0 }
+					<br/>
+					#{list items:user.bandset, as:"band"}
+					<input type="checkbox" id="sharedBand${band}" name="bandSet" value="${band}"/>${band}
+					#{/list}
+				#{/if}
+			#{/else}
+			<br/>
+			#{if nextExercise}
+				<!--a class="button" href="/Workout/${workoutSession.id}/${nextExercise.id}">Next</a-->
+				<input type="submit" value="Next"/>
+			#{/if}
+			#{else}
+				<a class="button">Done!</a>
+			#{/else}
+		#{/form}
 	#{/if}
 	#{else}
 		No exercise defined!
 	#{/else}
-	<!-- TODO differentiate on if there are more exercises or not -->
-	<br/>
-	<a class="button">Next</a>
 </div>
+
+#{if nextExercise}
+	<div class="workoutFrame">
+		<h4>Next:</h4>
+		${nextExercise.plan.name}
+	</div>
+#{/if}
