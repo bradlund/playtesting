@@ -1,5 +1,6 @@
 package controllers;
 
+import models.User;
 import models.executions.Exercise;
 import models.executions.Session;
 import play.mvc.Controller;
@@ -29,7 +30,7 @@ public class Workout extends Controller {
 
 		if (null != session && session.exercises.size() > 0) {
 			firstExercise = session.exercises.get(0);
-			workoutBySessionAndExercise( sessionId, firstExercise.id);
+			workoutBySessionAndExercise(sessionId, firstExercise.id);
 		}
 		else
 		{
@@ -44,8 +45,11 @@ public class Workout extends Controller {
 	 * @param exerciseId
 	 */
 	public static void workoutBySessionAndExercise(Long sessionId, Long exerciseId) {
+
+		// TODO: this isn't the real user
+		User user = (User) User.findAll().get(0);
 		Session session = Session.find("byId", sessionId).first();
 		Exercise exercise = Exercise.find("byId", exerciseId).first();
-		render(session, exercise);
+		render(session, exercise, user);
 	}
 }
