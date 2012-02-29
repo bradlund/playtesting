@@ -17,7 +17,8 @@ ${exercise?.name}
 			#{else}
 				<!-- this is an exercise like barbell bench - one input for weight/rep count -->
 				<!-- TODO use input type="number", using number polyfill https://github.com/jonstipe/number-polyfill -->
-				<input type="text" name="sharedRepCount" id="sharedRepCount"/> reps <input type="text" name="sharedRepWeight" id="sharedRepWeight"/> lbs +
+				<input type="text" name="sharedRepCount" id="sharedRepCount" maxlength="3"/> reps
+				<input type="text" name="sharedRepWeight" id="sharedRepWeight" maxlength="3"/> lbs +
 				#{if user.bandset.size() > 0 }
 					<br/>
 					#{list items:user.bandset, as:"band"}
@@ -25,10 +26,9 @@ ${exercise?.name}
 					#{/list}
 				#{/if}
 			#{/else}
-			<br/>
 			#{if nextExercise}
 				<!--a class="button" href="/Workout/${workoutSession.id}/${nextExercise.id}">Next</a-->
-				<input type="submit" value="Next"/>
+				<input type="submit" value="Next" class="advanceButton"/>
 			#{/if}
 			#{else}
 				<a class="button">Done!</a>

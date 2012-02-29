@@ -4,3 +4,17 @@ html, body {
     background: #364b66 !important;
     font-family: Helvetica, Arial, Sans !important;
 }
+
+.workoutFrame {
+    border: 2px solid;
+    /* this positioning is here to support the advance button floating in the bottom right corner */
+    position: relative;
+}
+
+/* advance button floats in the lower right corner of divs */
+.advanceButton {
+    font-size: 1em;
+    position: absolute;
+    bottom: 0.2em;
+    right: 0.2em;
+}
