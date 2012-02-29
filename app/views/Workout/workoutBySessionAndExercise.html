@@ -10,7 +10,7 @@ ${exercise?.name}
 <div class="workoutFrame">
 	#{if exercise}
 		<h4>Current:</h4>
-		#{form @Workout.postExerciseResult(workoutSession.id, exercise.id )}
+		#{form @Workout.postExerciseResult(workoutSession.id, exercise.id, nextExercise ? nextExercise.id : -1)}
 			#{if exercise.leftRightSeparate}
 				<!-- left and right separate moves have two inputs, one per side -->
 			#{/if}

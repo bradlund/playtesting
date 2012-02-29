@@ -63,9 +63,10 @@ public class Workout extends Controller {
 	}
 
 
-	public static void postExerciseResult(Long workoutSessionId, Long exerciseId, Float sharedRepCount, Float sharedRepWeight, String[] bandSet ) {
+	public static void postExerciseResult(Long workoutSessionId, Long exerciseId, Long nextExerciseId, Float sharedRepCount, Float sharedRepWeight, String[] bandSet ) {
 		Logger.info("Post received for the following parameters:");
 		Logger.info("Session: %s, Exercise %s", workoutSessionId, exerciseId);
 		Logger.info("I did %s reps of %s lbs, or used %s bands", sharedRepCount, sharedRepWeight, (bandSet != null) ? bandSet.length : "No");
+		workoutBySessionAndExercise( workoutSessionId, nextExerciseId);
 	}
 }
