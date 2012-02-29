@@ -7,11 +7,11 @@
 
 <div class="todaysSchedule">
 	Today:<br/>
-	Program: <span class="programName">${macroSession.name}</span>
+	Program: <span class="programName">${macroSession?.name}</span>
 
 	#{if todayWorkouts }
 		#{list items:todayWorkouts.sessions, as:'workoutSession'}
-		<div class="todayWorkoutSession">Workout: <span class="sessionName">${workoutSession.name}</span> <input type="button" title="Begin!"/></div>
+		<div class="todayWorkoutSession">Workout: <span class="sessionName">${workoutSession?.name}</span> <input type="button" title="Begin!"/></div>
 		#{/list}
 	#{/if}
 	#{else}
