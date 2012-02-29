@@ -1,10 +1,16 @@
 import models.User;
+import models.executions.Exercise;
+import models.executions.MacroSession;
+import models.executions.Session;
+import models.executions.WorkoutDay;
 import models.plans.ExercisePlan;
 import models.plans.MacroSessionPlan;
 import models.plans.SessionPlan;
 import models.plans.WorkoutDayPlan;
 import org.junit.*;
 import java.util.*;
+
+import play.Logger;
 import play.test.*;
 
 public class BasicTest extends UnitTest {
@@ -12,11 +18,6 @@ public class BasicTest extends UnitTest {
     @Before
     public void setup() {
         Fixtures.deleteDatabase();
-    }
-
-    @Test
-    public void aVeryImportantThingToTest() {
-        assertEquals(2, 1 + 1);
     }
 
     @Test
@@ -91,7 +92,7 @@ public class BasicTest extends UnitTest {
     @Test
     public void testYamlData() {
 		Fixtures.deleteAllModels();
-        Fixtures.loadModels( "UserAndPlan.yml");
+        Fixtures.loadModels("UserAndPlan.yml");
 
 		assertEquals( 10, ExercisePlan.count() );
         assertEquals( 4, SessionPlan.count());
@@ -119,5 +120,18 @@ public class BasicTest extends UnitTest {
 		assertNotNull( retrievedSessionPlan.exercisePlans );
 		assertEquals( 2, retrievedSessionPlan.exercisePlans.size());
 
+		User firstUser = User.find("byUsername", "brad").first();
+		MacroSessionPlan firstPlan = MacroSessionPlan.find("byName", "P90X Original").first();
+
+		Date startDate = new Date();
+		startDate.setDate( startDate.getDate() - 1);
+		MacroSession firstInstance = MacroSession.createFromTemplate( firstPlan, firstUser, startDate);
+		firstInstance.save();
+
+		assertEquals(1, User.count());
+		assertEquals(1, MacroSession.count());
+		assertEquals(4, WorkoutDay.count());
+		assertEquals(4, Session.count());
+		assertEquals(11, Exercise.count());
 	}
 }

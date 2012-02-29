@@ -39,11 +39,7 @@ public class Bootstrap extends Job {
 			MacroSession firstInstance = MacroSession.createFromTemplate( firstPlan, firstUser, startDate);
 			firstInstance.save();
 
-			Logger.info("System now has %s users", User.count());
-			Logger.info("System now has %s macro-sessions", MacroSession.count());
-			Logger.info( "System now has %s workout days", WorkoutDay.count());
-			Logger.info( "System now has %s workout sessions", Session.count());
-			Logger.info( "System now has %s exercise instances", Exercise.count());
+			Logger.info("Data has been loaded, and user brad has been given %s macrosession", MacroSession.count() );
         }
     }
 }
