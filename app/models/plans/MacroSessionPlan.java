@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * A macro session is a full multi day routine.  As an example, the full 90 day original session.
- *
+ * <p/>
  * Created with IntelliJ IDEA.
  * Date: 2/20/12
  * Time: 11:38 AM
@@ -19,11 +19,11 @@ import java.util.List;
 @Entity
 public class MacroSessionPlan extends Model {
 
-    @OneToMany(mappedBy="macroSessionPlan", cascade= CascadeType.ALL)
-    public List<WorkoutDayPlan> workoutDayPlans;
-    public String name;
-    public Date startDate;
-    public String authorName;
-    public User authorUser;
+	@OneToMany(mappedBy = "macroSessionPlan", cascade = CascadeType.ALL)
+	public List<WorkoutDayPlan> workoutDayPlans;
+	public String name;
+	public Date startDate;
+	public String authorName;
+	public User authorUser;
 
 }

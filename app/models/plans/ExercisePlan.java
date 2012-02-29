@@ -13,26 +13,26 @@ import java.util.List;
 @Entity
 public class ExercisePlan extends Model {
 
-    public String name;
-    public Boolean leftRightSeparate;
+	public String name;
+	public Boolean leftRightSeparate;
 	public String notes;
 
 	@ManyToMany(mappedBy = "exercisePlans")
 	public List<SessionPlan> sessionPlans;
 
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ExercisePlanToStandardRepCountPlan")
-    public List<RepCountPlan> standardRepCountPlans;
+	public List<RepCountPlan> standardRepCountPlans;
 
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ExercisePlanToLeftRepCountPlan")
 	public List<RepCountPlan> leftRepCountPlans;
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ExercisePlanToRightRepCountPlan")
 	public List<RepCountPlan> rightRepCountPlans;
 
-    public ExercisePlan(String name, Boolean leftRightSeparate) {
-        this.name = name;
-        this.leftRightSeparate = leftRightSeparate;
-    }
+	public ExercisePlan(String name, Boolean leftRightSeparate) {
+		this.name = name;
+		this.leftRightSeparate = leftRightSeparate;
+	}
 }

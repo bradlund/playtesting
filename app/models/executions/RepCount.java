@@ -1,12 +1,10 @@
 package models.executions;
 
 import models.RepType;
-import models.plans.RepCountPlan;
 import play.db.jpa.Model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import java.util.List;
 
 /**
@@ -17,25 +15,25 @@ import java.util.List;
 @Entity
 public class RepCount extends Model {
 
-    public int count;
+	public int count;
 
-    @ElementCollection
-    public List<String> bandsUsed;
+	@ElementCollection
+	public List<String> bandsUsed;
 
-    public String type = RepType.PRIMARY;
+	public String type = RepType.PRIMARY;
 
-    public RepCount(int count) {
-        this.count = count;
-    }
+	public RepCount(int count) {
+		this.count = count;
+	}
 
-    public RepCount(int count, String type) {
-        this.count = count;
-        this.type = type;
-    }
+	public RepCount(int count, String type) {
+		this.count = count;
+		this.type = type;
+	}
 
-    public RepCount(int count, List<String> bandsUsed, String type) {
-        this.count = count;
-        this.bandsUsed = bandsUsed;
-        this.type = type;
-    }
+	public RepCount(int count, List<String> bandsUsed, String type) {
+		this.count = count;
+		this.bandsUsed = bandsUsed;
+		this.type = type;
+	}
 }

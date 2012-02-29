@@ -1,11 +1,9 @@
 package models;
 
-import org.hibernate.annotations.CollectionOfElements;
 import play.db.jpa.Model;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import java.util.List;
 
 /**
@@ -16,10 +14,10 @@ import java.util.List;
 @Entity
 public class User extends Model {
 
-    public String username;
+	public String username;
 
-    public String password;
+	public String password;
 
-    @ElementCollection
-    public List<String> bandset;
+	@ElementCollection
+	public List<String> bandset;
 }

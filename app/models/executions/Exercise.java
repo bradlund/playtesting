@@ -17,18 +17,18 @@ public class Exercise extends Model {
 	@ManyToMany(mappedBy = "exercises")
 	public List<Session> sessions;
 
-    public String name;
-    public Boolean leftRightSeparate;
+	public String name;
+	public Boolean leftRightSeparate;
 	public String notes;
 
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ExerciseToStandardRepCount")
 	public List<RepCount> standardRepCount;
 
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ExerciseToLeftRepCount")
 	public List<RepCount> leftRepCount;
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "ExerciseToLeftRepCount")
 	public List<RepCount> rightRepCount;
 
@@ -38,14 +38,13 @@ public class Exercise extends Model {
 	public Boolean tooEasy;
 	public Boolean tooHard;
 
-    public Exercise(String name, Boolean leftRightSeparate) {
-        this.name = name;
-        this.leftRightSeparate = leftRightSeparate;
-    }
+	public Exercise(String name, Boolean leftRightSeparate) {
+		this.name = name;
+		this.leftRightSeparate = leftRightSeparate;
+	}
 
-	public static Exercise createFromTemplate( ExercisePlan plan )
-	{
-		Exercise exercise = new Exercise( plan.name, plan.leftRightSeparate );
+	public static Exercise createFromTemplate(ExercisePlan plan) {
+		Exercise exercise = new Exercise(plan.name, plan.leftRightSeparate);
 		exercise.plan = plan;
 
 		return exercise;

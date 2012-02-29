@@ -8,23 +8,25 @@ package models.plans;
 
 import play.db.jpa.Model;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.List;
 
 @Entity
 public class SessionPlan extends Model {
 
-    @ManyToMany( cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL)
 	//@JoinTable(name = "SessionPlanToExercisePlanTable")
-    public List<ExercisePlan> exercisePlans;
+	public List<ExercisePlan> exercisePlans;
 
-    public Boolean isOptional;
+	public Boolean isOptional;
 
-    public String name;
+	public String name;
 
-    public SessionPlan(String name, Boolean optional, List<ExercisePlan> exercisePlans) {
-        this.name = name;
-        isOptional = optional;
-        this.exercisePlans = exercisePlans;
-    }
+	public SessionPlan(String name, Boolean optional, List<ExercisePlan> exercisePlans) {
+		this.name = name;
+		isOptional = optional;
+		this.exercisePlans = exercisePlans;
+	}
 }
