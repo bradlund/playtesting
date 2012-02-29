@@ -35,6 +35,9 @@ public class Exercise extends Model {
 	@ManyToOne
 	public ExercisePlan plan;
 
+	public Boolean tooEasy;
+	public Boolean tooHard;
+
     public Exercise(String name, Boolean leftRightSeparate) {
         this.name = name;
         this.leftRightSeparate = leftRightSeparate;
